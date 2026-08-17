@@ -24,11 +24,10 @@ export default function LandingPage() {
         <main>
           <section className="hero" aria-labelledby="hero-title">
             <div className="hero__copy">
-              <span className="eyebrow"><Sparkles size={15} /> Smarter food recovery</span>
               <h1 id="hero-title">
-                Predict surplus.
-                <span>Prevent waste.</span>
-                Feed communities.
+                <span className="hero-title__line">Predict surplus.</span>
+                <span className="hero-title__line hero-title__line--accent">Prevent waste.</span>
+                <span className="hero-title__line">Feed communities.</span>
               </h1>
               <p>CrumbCycle uses AI to predict food surplus, recommend actions, and connect businesses with NGOs and food banks—turning excess into impact.</p>
               <div className="hero__actions">
@@ -37,9 +36,7 @@ export default function LandingPage() {
               </div>
             </div>
             <div className="hero__visual" aria-label="Food moving through a cycle from surplus to families">
-              <div className="hero__image-halo" />
-              <img src="/crumbcycle-hero.png" alt="An illuminated food cycle joining fresh produce with a family receiving a meal" />
-              <div className="hero__impact-pill"><span>Today’s potential</span><strong>1,248 meals</strong></div>
+              <img src="/crumbcycle-hero-transparent.png" alt="An illuminated food cycle joining fresh produce with a family receiving a meal" />
             </div>
           </section>
 
