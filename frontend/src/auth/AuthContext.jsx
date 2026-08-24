@@ -38,6 +38,11 @@ export function AuthProvider({ children }) {
     [persistSession],
   );
 
+  const googleSignup = useCallback(
+    async (details) => persistSession(await apiClient.post("/auth/google", details, { token: null })),
+    [persistSession],
+  );
+
   const logout = useCallback(async () => {
     try {
       if (session?.accessToken) {
@@ -62,9 +67,10 @@ export function AuthProvider({ children }) {
       isAuthenticated: Boolean(session?.accessToken),
       login,
       signup,
+      googleSignup,
       logout,
     }),
-    [session, login, signup, logout],
+    [session, login, signup, googleSignup, logout],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

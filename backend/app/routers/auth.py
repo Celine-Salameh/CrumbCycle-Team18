@@ -1,13 +1,13 @@
-﻿from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from app.crud.auth import blacklist_access_token
 from app.db.session import get_db
 from app.dependencies import get_current_access_payload, get_current_user, token_expiration_from_payload
 from app.models.user import User
-from app.schemas.auth import LoginRequest, LogoutRequest, RefreshRequest, RegisterRequest, TokenResponse
+from app.schemas.auth import GoogleSignupRequest, LoginRequest, LogoutRequest, RefreshRequest, RegisterRequest, TokenResponse
 from app.schemas.user import UserRead
-from app.services.auth_service import login_user, refresh_tokens, register_user, revoke_refresh_if_present
+from app.services.auth_service import google_signup_user, login_user, refresh_tokens, register_user, revoke_refresh_if_present
 
 router = APIRouter()
 
@@ -20,6 +20,11 @@ def register(payload: RegisterRequest, db: Session = Depends(get_db)) -> TokenRe
 @router.post("/login", response_model=TokenResponse)
 def login(payload: LoginRequest, db: Session = Depends(get_db)) -> TokenResponse:
     return login_user(db, payload)
+
+
+@router.post("/google", response_model=TokenResponse)
+def google_signup(payload: GoogleSignupRequest, db: Session = Depends(get_db)) -> TokenResponse:
+    return google_signup_user(db, payload)
 
 
 @router.post("/refresh", response_model=TokenResponse)
