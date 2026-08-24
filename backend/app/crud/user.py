@@ -1,4 +1,4 @@
-﻿from sqlalchemy import select
+from sqlalchemy import select
 from sqlalchemy.orm import Session, joinedload
 
 from app.models.role import Role
@@ -15,3 +15,7 @@ def get_user_by_id(db: Session, user_id: int) -> User | None:
 
 def get_role_by_name(db: Session, name: str) -> Role | None:
     return db.scalar(select(Role).where(Role.name == name))
+
+
+def get_user_by_google_id(db: Session, google_id: str) -> User | None:
+    return db.scalar(select(User).options(joinedload(User.role)).where(User.google_id == google_id))
